@@ -9,9 +9,9 @@
 
   - name : start and enable nginx
     ansible.buitlin.service:
-    name : nginx
-    state : started
-    enabled : yes
+     name : nginx
+     state : started
+     enabled : yes
   
   - name : delete default website
     ansible.builtin.file :
