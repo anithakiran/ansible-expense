@@ -14,7 +14,7 @@
   - name : install nodejs
     ansible.builtin.dnf:
      name : "{{ item }}" 
-     state : installed
+     state : latest
     loop :
     - nodejs
     - mysql   
@@ -38,7 +38,7 @@
      src : /tmp/backend.zip
      dest : /app
      remote_src : yes
-     
+
   - name : install npm depdencies
     ansible.builtin.command : npm install
     args : 
@@ -57,7 +57,7 @@
      executable : pip3.9
 
   - name : import data into mysql 
-    community.mysql.mysql_db:
+    community.mysql.mysql_db :
      login_user : root
      login_password : "{{ login_password }}"
      login_host : "{{ login_host }}"
