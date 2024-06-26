@@ -12,7 +12,7 @@
     ansible.builtin.command: dnf module enable nodejs:20  -y
 
   - name : install nodejs
-    ansible_builtin.dnf:
+    ansible.builtin.dnf:
      name : "{{ item }}" 
      state : installed
     loop :
