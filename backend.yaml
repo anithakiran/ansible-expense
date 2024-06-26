@@ -6,10 +6,10 @@
     login_password : ExpenseApp@1
   tasks : 
   - name : disable default node js
-    ansible_builtin.command: dnf module disable nodejs -y
+    ansible.builtin.command: dnf module disable nodejs -y
   
   - name : disable enable nodejs:20
-    ansible_builtin.command: dnf module enable nodejs:20  -y
+    ansible.builtin.command: dnf module enable nodejs:20  -y
 
   - name : install nodejs
     ansible_builtin.dnf:
@@ -20,11 +20,11 @@
     - mysql   
   
   - name : create expense user
-    ansible_builtin.user:
+    ansible.builtin.user:
      name : expense
 
   - name : create app directory
-    ansible_builtin.file:
+    ansible.builtin.file:
     path : /app
     state : directory
   
