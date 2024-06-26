@@ -6,13 +6,13 @@
     login_password: ExpenseApp@1
   tasks:
   - name: disable default nodejs
-    ansible.builtin.command: dnf module disable nodejs -y
+    ansible.builtin.command: dnf module disable nodejs -y #dnf command module to disable nodejs
 
   - name: enable nodejs:20
-    ansible.builtin.command: dnf module enable nodejs:20 -y
+    ansible.builtin.command: dnf module enable nodejs:20 -y # dnf command module to enable nodejs:20
 
-  - name: install nodejs
-    ansible.builtin.dnf: # only works for Redhat family
+  - name: install nodejs 
+    ansible.builtin.dnf: #dnf module to install mysql and nodejs
       name: "{{ item }}"
       state: installed
     loop:
@@ -20,27 +20,27 @@
     - mysql
 
   - name: create expense user
-    ansible.builtin.user:
+    ansible.builtin.user: #user module to create 
       name: expense
 
   - name: create app directory
-    ansible.builtin.file:
+    ansible.builtin.file: #file module to create a directory
       path: /app
       state: directory
 
   - name: download backend code
-    ansible.builtin.get_url:
+    ansible.builtin.get_url: #get_url module to download code
       url: https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip
       dest: /tmp/backend.zip
 
   - name: unzip backend code
-    ansible.builtin.unarchive:
-      src: /tmp/backend.zip # by default checks in ansible server
+    ansible.builtin.unarchive: #unarchive module to unzip code
+      src: /tmp/backend.zip 
       dest: /app
       remote_src: yes
 
   - name: install npm dependencies
-    ansible.builtin.command: npm install
+    ansible.builtin.command: npm install 
     args:
       chdir: /app
 
@@ -52,9 +52,9 @@
   - name: install python mysql dependencies
     ansible.builtin.pip: 
       name:
-      - PyMySQL # to connect MySQL DB from Ansible
+      - PyMySQL 
       - cryptography
-      executable: pip3.9 # pip3.11 if python version is 3.11
+      executable: pip3.9
 
   - name: import data into mysql
     community.mysql.mysql_db:
@@ -76,4 +76,4 @@
       enabled: yes
 
       
-  
+   
